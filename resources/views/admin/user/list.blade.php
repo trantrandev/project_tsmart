@@ -6,7 +6,7 @@
             <h5 class="m-0 ">Danh sách thành viên</h5>
             <div class="form-search form-inline">
                 <form action="#">
-                    <input type="text" name="keyword" class="form-control form-search" placeholder="Tìm kiếm">
+                    <input type="text" name="keyword" class="form-control form-search" value="{{ request()->input('keyword') }}" placeholder="Tìm kiếm">
                     <input type="submit" name="btn-search" value="Tìm kiếm" class="btn btn-primary">
                 </form>
             </div>
