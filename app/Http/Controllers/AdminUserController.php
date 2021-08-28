@@ -15,7 +15,11 @@ class AdminUserController extends Controller
     }
     
     function list(Request $request) {
-         $users = User::paginate(10);
+        $keyword = "";
+        if($request->input('keyword')) {
+            $keyword = $request->input('keyword');
+        }
+         $users = User::where('name', 'LIKE', "%{$keyword}%")->paginate(10);
          return view('admin.user.list', compact('users'));
     }
 

@@ -6,7 +6,7 @@
             <h5 class="m-0 ">Danh sách thành viên</h5>
             <div class="form-search form-inline">
                 <form action="#">
-                    <input type="" class="form-control form-search" placeholder="Tìm kiếm">
+                    <input type="text" name="keyword" class="form-control form-search" placeholder="Tìm kiếm">
                     <input type="submit" name="btn-search" value="Tìm kiếm" class="btn btn-primary">
                 </form>
             </div>
@@ -40,6 +40,8 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @if ($users->total() > 0)
+
                     @php
                     $t = 0;
                     @endphp
@@ -63,10 +65,19 @@
                     </tr>
                     @endforeach
 
-                </tbody>
-            </table>             
-            {{ $users->links() }}
-        </div>
-    </div>
+                    @else
+                    <tr>
+                        <td colspan="8" class="">
+                         {!! show_html_status_find(); !!}
+                     </td>
+                 </tr>
+                 @endif
+
+
+             </tbody>
+         </table>             
+         {{ $users->links() }}
+     </div>
+ </div>
 </div>
 @endsection
