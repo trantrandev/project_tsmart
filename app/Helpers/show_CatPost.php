@@ -1,7 +1,9 @@
 <?php 
-//load data html
-	function load_data_table($cats){
-		//Load lại bảng danh mục			
+
+/*load data html*/
+if (!function_exists('load_data_table_catpost')) {
+	function load_data_table_catpost($cats){
+		/*Load lại bảng danh mục			*/
 		$html_table_cat = '';
 		$t = 0;
 		foreach ($cats as $cat) {
@@ -17,10 +19,12 @@
 			$html_table_cat.='</tr>';
 		}
 		return $html_table_cat;
-	}		 
+	}	
+}
 
-		//load option data
-	function load_data_option($cats) {			
+if(!function_exists('load_data_option_catpost')) {
+	/*load option data*/
+	function load_data_option_catpost($cats) {			
 		$html_option_cat = '';
 		$html_option_cat.='<option value="0">Chọn danh mục (Mặc định gốc)</option>';						
 		foreach ($cats as $cat) {
@@ -29,14 +33,18 @@
 		}
 		return $html_option_cat;
 	}
+}
 
-		//load status
+if(!function_exists('load_status')) {
+	/*load status*/
 	function load_status($message, $alert = 'success') {			
 		$status = '<div id="status" class="alert alert-'.$alert.'">'.$message.'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>';
 		return $status;
 	}
+}
 
-	function check_validation_cat($request) {
+if(!function_exists('check_validation_catpost')) {
+	function check_validation_catpost($request) {
 		return Validator::make($request->all(), [
 			'name' => ['required', 'string', 'max:255'],				
 		],
@@ -46,6 +54,11 @@
 		],
 		[
 			'name' => 'Tên danh mục'
-		]
-	);
+		]);
 	}
+}
+
+
+
+
+
