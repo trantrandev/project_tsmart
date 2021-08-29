@@ -12,12 +12,11 @@ function show_status_bg($status) {
 function show_html_status_find() {
 	$html = '<p class="bg-info text-white p-2 mb-0">Không bản ghi nào được tìm thấy</p>';
 	return $html;
-
 }
 
 function show_array($array) {
 	if(is_array($array)) {
-		echo "<pre>";
+		echo "<pre>"; 
 		print_r($array);
 		echo "</pre>";
 	}else{
