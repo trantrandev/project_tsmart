@@ -176,8 +176,15 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
+
         //add helpers
-        App\Providers\HelperServiceProvider::class
+        App\Providers\HelperServiceProvider::class,
+
+        //su dung collection component html
+        Collective\Html\HtmlServiceProvider::class,
+        // dang ky su dung collection comnent htmll
+        App\Providers\FormServiceProvider::class,
+
 
     ],
 
@@ -232,6 +239,10 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        //khai bao html collective component
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

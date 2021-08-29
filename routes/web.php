@@ -25,4 +25,6 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 Route::get('dashboard', [DashboardController::class, 'show'])->middleware('auth');
+//USER
 Route::get('admin/user/list', [AdminUserController::class, 'list']);
+Route::get('admin/user/add', [AdminUserController::class, 'add']);
