@@ -24,4 +24,15 @@ Route::get('/', function () {
 //     return view('dashboard');
 // })->name('dashboard');
 
-Route::get('dashboard', [DashboardController::class, 'show'])->middleware('auth');
+Route::get('dashboard', [DashboardController::class, 'show'])->middleware('auth')->name('dashboard');
+Route::get('admin', [DashboardController::class, 'show']);
+
+Route::get('logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+
+    return Redirect::to('/');
+})->name('logout');
+
+Route::get('admin/user/list', [AdminUserController::class, 'list']);
