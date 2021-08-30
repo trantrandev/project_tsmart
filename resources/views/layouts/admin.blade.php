@@ -2,198 +2,268 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/solid.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
-    <title>Admintrator</title>
-</head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+	<title>Hotel Dashboard Template</title>
+	<link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/fontawesome.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/feathericon.min.css') }}">
+	<link rel="stylehseet" href="https://cdn.oesmith.co.uk/morris-0.5.1.css">
+	<link rel="stylesheet" href="{{ asset('plugins/morris/morris.css') }}">
+	<link rel="stylesheet" href="{{ asset('css/style.css') }}"> </head>
 
-<body>
-    
- <div id="warpper" class="nav-fixed">
-    <nav class="topnav shadow navbar-light bg-white d-flex">
-        <div class="navbar-brand"><a href="?">StoreESmart</a></div>
-        <div class="nav-right ">
-            <div class="btn-group mr-auto">
-                <button type="button" class="btn dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="plus-icon fas fa-plus-circle"></i>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{{ url('admin/post/add') }}">Thêm bài viết</a>
-                    <a class="dropdown-item" href="{{ url('admin/product/add') }}">Thêm sản phẩm</a>
-                    <a class="dropdown-item" href="{{ url('admin/order/list') }}">Xem đơn hàng</a>
-                </div>
-            </div>
-            <div class="btn-group">
-                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ Auth::user() -> name }}
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{{ url('admin/user/profile') }}">Tài khoản</a>
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-                    {{ __('Thoát') }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- end nav  -->
-<div id="page-body" class="d-flex">
- @if (session()->has('module_active'))
- @php
- $module_active = session('module_active');
- @endphp
- <div id="sidebar" class="bg-white">
-    <ul id="sidebar-menu">
-        <li class="nav-link {{ $module_active == 'dashboard'?'active':'' }}">
-            <a href="{{ url('dashboard') }}">
-                <div class="nav-link-icon d-inline-flex">
-                    <i class="far fa-folder"></i>
-                </div>
-                Tổng quan
-            </a>
-        </li>
-        <li class="nav-link @php if($module_active == 'page') echo 'active';  @endphp">
-            <a href="{{ url('admin/page/list') }}">
-                <div class="nav-link-icon d-inline-flex">
-                    <i class="far fa-folder"></i>
-                </div>
-                Trang
-            </a>
-            <i class="arrow fas fa-angle-right"></i>
-
-            <ul class="sub-menu">
-                <li><a href="{{ url('admin/page/add') }}">Thêm mới</a></li>
-                <li><a href="{{ url('admin/page/list') }}">Danh sách</a></li>
-            </ul>
-        </li>
-        <li class="nav-link @php if($module_active == 'post') echo 'active';  @endphp">
-            <a href="{{ url('admin/post/list') }}">
-                <div class="nav-link-icon d-inline-flex">
-                    <i class="far fa-folder"></i>
-                </div>
-                Bài viết
-            </a>
-            <i class="arrow fas fa-angle-right"></i>
-            <ul class="sub-menu">
-                <li><a href="{{ url('admin/post/add') }}">Thêm mới</a></li>
-                <li><a href="{{ url('admin/post/list') }}">Danh sách</a></li>
-                <li><a href="{{ url('admin/post/cat/list') }}">Danh mục</a></li>
-            </ul>
-        </li>
-        <li class="nav-link @php if($module_active == 'product') echo 'active';  @endphp">
-            <a href="{{ url('admin/product/list') }}">
-                <div class="nav-link-icon d-inline-flex">
-                    <i class="far fa-folder"></i>
-                </div>
-                Sản phẩm
-            </a>
-            <i class="arrow fas fa-angle-down"></i>
-            <ul class="sub-menu">
-                <li><a href="{{ url('admin/product/add') }}">Thêm mới</a></li>
-                <li><a href="{{ url('admin/product/list') }}">Danh sách</a></li>
-                <li><a href="{{ url('admin/product/cat/add') }}">Danh mục</a></li>
-            </ul>
-        </li>
-        <li class="nav-link @php if($module_active == 'order') echo 'active';  @endphp">
-            <a href="{{ url('admin/order/list') }}">
-                <div class="nav-link-icon d-inline-flex">
-                    <i class="far fa-folder"></i>
-                </div>
-                Bán hàng
-            </a>
-            <i class="arrow fas fa-angle-right"></i>
-            <ul class="sub-menu">
-                <li><a href="{{ url('admin/order/list') }}">Đơn hàng</a></li>
-            </ul>
-        </li>
-        <li class="nav-link @php if($module_active == 'user') echo 'active';  @endphp">
-            <a href="{{ url('admin/user/list') }}">
-                <div class="nav-link-icon d-inline-flex">
-                    <i class="far fa-folder"></i>
-                </div>
-                Users
-            </a>
-            <i class="arrow fas fa-angle-right"></i>
-
-            <ul class="sub-menu">
-                <li><a href="{{ url('admin/user/add') }}">Thêm mới</a></li>
-                <li><a href="{{ url('admin/user/list') }}">Danh sách</a></li>
-            </ul>
-        </li>
-    </ul>
+	<body>
+		<div class="main-wrapper">
+			<div class="header">
+				<div class="header-left">
+					<a href="index.html" class="logo"> <img src="{{ asset('img/hotel_logo.png') }}" width="50" height="70" alt="logo"> <span class="logoclass">HOTEL</span> </a>
+					<a href="index.html" class="logo logo-small"> <img src="{{ asset('img/hotel_logo.png') }}" alt="Logo" width="30" height="30"> </a>
+				</div>
+				<a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
+				<a class="mobile_btn" id="mobile_btn"> <i class="fas fa-bars"></i> </a>
+				<ul class="nav user-menu">
+					<li class="nav-item dropdown noti-dropdown">
+						<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <i class="fe fe-bell"></i> <span class="badge badge-pill">3</span> </a>
+						<div class="dropdown-menu notifications">
+							<div class="topnav-dropdown-header"> <span class="notification-title">Notifications</span> <a href="javascript:void(0)" class="clear-noti"> Clear All </a> </div>
+							<div class="noti-content">
+								<ul class="notification-list">
+									<li class="notification-message">
+										<a href="#">
+											<div class="media"> <span class="avatar avatar-sm">
+												<img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('img/profiles/avatar-02.jpg') }}">
+											</span>
+											<div class="media-body">
+												<p class="noti-details"><span class="noti-title">Carlson Tech</span> has approved <span class="noti-title">your estimate</span></p>
+												<p class="noti-time"><span class="notification-time">4 mins ago</span> </p>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li class="notification-message">
+									<a href="#">
+										<div class="media"> <span class="avatar avatar-sm">
+											<img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('img/profiles/avatar-01.jpg') }}">
+										</span>
+										<div class="media-body">
+											<p class="noti-details"><span class="noti-title">International Software
+											Inc</span> has sent you a invoice in the amount of <span class="noti-title">$218</span></p>
+											<p class="noti-time"><span class="notification-time">6 mins ago</span> </p>
+										</div>
+									</div>
+								</a>
+							</li>
+							<li class="notification-message">
+								<a href="#">
+									<div class="media"> <span class="avatar avatar-sm">
+										<img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('img/profiles/avatar-17.jpg') }}">
+									</span>
+									<div class="media-body">
+										<p class="noti-details"><span class="noti-title">John Hendry</span> sent a cancellation request <span class="noti-title">Apple iPhone
+										XR</span></p>
+										<p class="noti-time"><span class="notification-time">8 mins ago</span> </p>
+									</div>
+								</div>
+							</a>
+						</li>
+						<li class="notification-message">
+							<a href="#">
+								<div class="media"> <span class="avatar avatar-sm">
+									<img class="avatar-img rounded-circle" alt="User Image" src="{{ asset('img/profiles/avatar-13.jpg') }}">
+								</span>
+								<div class="media-body">
+									<p class="noti-details"><span class="noti-title">Mercury Software
+									Inc</span> added a new product <span class="noti-title">Apple
+									MacBook Pro</span></p>
+									<p class="noti-time"><span class="notification-time">12 mins ago</span> </p>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="topnav-dropdown-footer"> <a href="#">View all Notifications</a> </div>
+		</div>
+	</li>
+	<li class="nav-item dropdown has-arrow">
+		<a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"> <span class="user-img"><img class="rounded-circle" src="{{ asset('img/profiles/avatar-01.jpg') }}" width="31" alt="Soeng Souy"></span> </a>
+		<div class="dropdown-menu">
+			<div class="user-header">
+				<div class="avatar avatar-sm"> <img src="{{ asset('img/profiles/avatar-01.jpg') }}" alt="User Image" class="avatar-img rounded-circle"> </div>
+				<div class="user-text">
+					<h6>Soeng Souy</h6>
+					<p class="text-muted mb-0">Administrator</p>
+				</div>
+			</div> <a class="dropdown-item" href="profile.html">My Profile</a> <a class="dropdown-item" href="settings.html">Account Settings</a> <a class="dropdown-item" href="login.html">Logout</a> </div>
+		</li>
+	</ul>
+	<div class="top-nav-search">
+		<form>
+			<input type="text" class="form-control" placeholder="Search here">
+			<button class="btn" type="submit"><i class="fas fa-search"></i></button>
+		</form>
+	</div>
 </div>
+<!-- END HEAD -->
 
-@endif
-<div id="wp-content">
-    @yield('content')
+<div class="sidebar" id="sidebar">
+	<div class="sidebar-inner slimscroll">
+		<div id="sidebar-menu" class="sidebar-menu">
+			<ul>
+				<li class="active"> <a href="index.html"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a> </li>
+				<li class="list-divider"></li>
+				<li class="submenu"> <a href="#"><i class="fas fa-suitcase"></i> <span> Booking </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="all-booking.html"> All Booking </a></li>
+						<li><a href="edit-booking.html"> Edit Booking </a></li>
+						<li><a href="add-booking.html"> Add Booking </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Customers </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="all-customer.html"> All customers </a></li>
+						<li><a href="edit-customer.html"> Edit Customer </a></li>
+						<li><a href="add-customer.html"> Add Customer </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-key"></i> <span> Rooms </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="all-rooms.html">All Rooms </a></li>
+						<li><a href="edit-room.html"> Edit Rooms </a></li>
+						<li><a href="add-room.html"> Add Rooms </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Staff </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="all-staff.html">All Staff </a></li>
+						<li><a href="edit-staff.html"> Edit Staff </a></li>
+						<li><a href="add-staff.html"> Add Staff </a></li>
+					</ul>
+				</li>
+				<li> <a href="pricing.html"><i class="far fa-money-bill-alt"></i> <span>Pricing</span></a> </li>
+				<li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Apps </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="chat.html"><i class="fas fa-comments"></i><span> Chat </span></a></li>
+						<li class="submenu"> <a href="#"><i class="fas fa-video camera"></i> <span> Calls </span> <span class="menu-arrow"></span></a>
+							<ul class="submenu_class" style="display: none;">
+								<li><a href="voice-call.html"> Voice Call </a></li>
+								<li><a href="video-call.html"> Video Call </a></li>
+								<li><a href="incoming-call.html"> Incoming Call </a></li>
+							</ul>
+						</li>
+						<li class="submenu"> <a href="#"><i class="fas fa-envelope"></i> <span> Email </span> <span class="menu-arrow"></span></a>
+							<ul class="submenu_class" style="display: none;">
+								<li><a href="compose.html">Compose Mail </a></li>
+								<li><a href="inbox.html"> Inbox </a></li>
+								<li><a href="mail-veiw.html"> Mail Veiw </a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-user"></i> <span> Employees </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="employees.html">Employees List </a></li>
+						<li><a href="leaves.html">Leaves </a></li>
+						<li><a href="holidays.html">Holidays </a></li>
+						<li><a href="attendance.html">Attendance </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="far fa-money-bill-alt"></i> <span> Accounts </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="invoices.html">Invoices </a></li>
+						<li><a href="payments.html">Payments </a></li>
+						<li><a href="expenses.html">Expenses </a></li>
+						<li><a href="taxes.html">Taxes </a></li>
+						<li><a href="provident-fund.html">Provident Fund </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="salary.html">Employee Salary </a></li>
+						<li><a href="salary-veiw.html">Payslip </a></li>
+					</ul>
+				</li>
+				<li> <a href="calendar.html"><i class="fas fa-calendar-alt"></i> <span>Calendar</span></a> </li>
+				<li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Blog </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="blog.html">Blog </a></li>
+						<li><a href="blog-details.html">Blog Veiw </a></li>
+						<li><a href="add-blog.html">Add Blog </a></li>
+						<li><a href="edit-blog.html">Edit Blog </a></li>
+					</ul>
+				</li>
+				<li> <a href="assets.html"><i class="fas fa-cube"></i> <span>Assests</span></a> </li>
+				<li> <a href="activities.html"><i class="far fa-bell"></i> <span>Activities</span></a> </li>
+				<li class="submenu"> <a href="#"><i class="fe fe-table"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="expense-reports.html">Expense Report </a></li>
+						<li><a href="invoice-reports.html">Invoice Report </a></li>
+					</ul>
+				</li>
+				<li> <a href="settings.html"><i class="fas fa-cog"></i> <span>Settings</span></a> </li>
+				<li class="list-divider"></li>
+				<li class="menu-title mt-3"> <span>UI ELEMENTS</span> </li>
+				<li class="submenu"> <a href="#"><i class="fas fa-laptop"></i> <span> Components </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="uikit.html">UI Kit </a></li>
+						<li><a href="typography.html">Typography </a></li>
+						<li><a href="tabs.html">Tabs </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-edit"></i> <span> Forms </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="form-basic-inputs.html">Basic Input </a></li>
+						<li><a href="form-input-groups.html">Input Groups </a></li>
+						<li><a href="form-horizontal.html">Horizontal Form </a></li>
+						<li><a href="form-vertical.html">Vertical Form </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-table"></i> <span> Tables </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="tables-basic.html">Basic Table </a></li>
+						<li><a href="tables-datatables.html">Data Table </a></li>
+					</ul>
+				</li>
+				<li class="list-divider"></li>
+				<li class="menu-title mt-3"> <span>EXTRAS</span> </li>
+				<li class="submenu"> <a href="#"><i class="fas fa-columns"></i> <span> Pages </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="login.html">Login </a></li>
+						<li><a href="register.html">Register </a></li>
+						<li><a href="forgot-password.html">Forgot Password </a></li>
+						<li><a href="change-password.html">Change Password </a></li>
+						<li><a href="lock-screen.html">Lockscreen </a></li>
+						<li><a href="profile.html">Profile </a></li>
+						<li><a href="gallery.html">Gallery </a></li>
+						<li><a href="error-404.html">404 Error </a></li>
+						<li><a href="error-500.html">500 Error </a></li>
+						<li><a href="blank-page.html">Blank Page </a></li>
+					</ul>
+				</li>
+				<li class="submenu"> <a href="#"><i class="fas fa-share-alt"></i> <span> Multi Level </span> <span class="menu-arrow"></span></a>
+					<ul class="submenu_class" style="display: none;">
+						<li><a href="">Level 1 </a></li>
+						<li><a href="">Level 2 </a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
+<div class="page-wrapper">
+	@yield('content')
 </div>
-
-
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="{{ asset('js/jstheme.js') }}"></script>
-
-{{-- Bootstrap --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="{{ asset('js/data.js') }}"></script>
-
-{{-- tiny mce --}}
-<script src="https://cdn.tiny.cloud/1/1in0ekeaxvf1szp7qq394rxn48u0pyox50g6vol2vel774ao/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-    var editor_config = {
-        path_absolute : "http://localhost/tsmart/",
-        selector: 'textarea',
-        relative_urls: false,
-        plugins: [
-        "advlist autolink lists link image charmap print preview hr anchor pagebreak",
-        "searchreplace wordcount visualblocks visualchars code fullscreen",
-        "insertdatetime media nonbreaking save table directionality",
-        "emoticons template paste textpattern"
-        ],
-        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media",
-        file_picker_callback : function(callback, value, meta) {
-          var x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
-          var y = window.innerHeight|| document.documentElement.clientHeight|| document.getElementsByTagName('body')[0].clientHeight;
-
-          var cmsURL = editor_config.path_absolute + 'laravel-filemanager?editor=' + meta.fieldname;
-          if (meta.filetype == 'image') {
-            cmsURL = cmsURL + "&type=Images";
-        } else {
-            cmsURL = cmsURL + "&type=Files";
-        }
-
-        tinyMCE.activeEditor.windowManager.openUrl({
-            url : cmsURL,
-            title : 'Filemanager',
-            width : x * 0.8,
-            height : y * 0.8,
-            resizable : "yes",
-            close_previous : "no",
-            onMessage: (api, message) => {
-              callback(message.content);
-          }
-      });
-    }
-};
-
-tinymce.init(editor_config);
-</script>
-
+<script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script src="{{ asset('js/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
+<script src="{{ asset('js/chart.morris.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>
