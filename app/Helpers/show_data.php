@@ -30,11 +30,36 @@ if(!function_exists('show_array')) {
 	}
 }
 
+if(!function_exists('show_gender')) {
+	function show_gender($gender) {
+		$array_gender = array(
+			'male' => 'Nam',
+			'female' => 'Nữ'
+		);
+		if(array_key_exists($gender, $array_gender)) {
+			return $array_gender[$gender];
+		}
+	}
+}
+
+if(!function_exists('show_status_type1')) {
+	function show_status_type1($status) {
+		$array_data = array(
+			'active' => '<span class="badge badge-success">Kích hoạt</span>',
+			'disable' => '<span class="badge badge-secondary">Vô hiệu</span>'
+		);
+		if(array_key_exists($status, $array_data)){
+			return $array_data[$status];
+		}
+	}
+}
+
 if(!function_exists('show_status')) {
 	function show_status($status) {
 		$array_data = array(
-			'show' => '<span class="badge badge-success">Hiển thị</span>',
-			'hide' => '<span class="badge badge-secondary">Vô hiệu</span>'
+			'active' => '<div class="actions"><a href="#" class="btn btn-sm bg-success-light mr-2">Hoạt động</a> </div>',
+			'disable' => '<div class="actions"><a href="#" class="btn btn-sm bg-secondary-light mr-2">Vô hiệu</a>
+			</div>'
 		);
 		if(array_key_exists($status, $array_data)){
 			return $array_data[$status];

@@ -1,4 +1,4 @@
-@import "../../../../../css.css";
+/*@import "../../../../../css.css";*/
 @font-face {
 	font-family: material icons;
 	font-style: normal;
@@ -910,6 +910,10 @@ button.bg-danger:hover {
 .bg-success-light {
 	background-color: rgba(15, 183, 107, 0.12) !important;
 	color: #26af48 !important;
+}
+.bg-secondary-light {
+	background-color: #cfdeec !important;
+	color: #4b7095 !important;
 }
 .bg-purple-light {
 	background-color: rgba(197, 128, 255, 0.12) !important;
@@ -5797,4 +5801,31 @@ h3.page-sub-title {
 	.page-header .breadcrumb {
 		display: none;
 	}
+}
+
+/*custom hand*/
+a.action-icon {
+	padding: 10px 20px;
+}
+
+.dropdown-action a.dropdown-item.edit {
+	color: green;
+}
+.dropdown-action a.dropdown-item[data-target="#delete_asset"] {
+	color: red!important;
+}
+input[type=checkbox]:hover {
+	cursor: pointer;
+}
+
+/*DATA TABLE*/
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .current {
+	background: #009688!important;
+	border-color: #009688!important;
+	color: #fff!important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover{
+	color: #fff;
+    background: #007bff;
+    border-color: #007bff;
 }

@@ -27,6 +27,7 @@ Route::get('/', function () {
 Route::get('dashboard', [DashboardController::class, 'show'])->middleware('auth')->name('dashboard');
 Route::get('admin', [DashboardController::class, 'show']);
 
+//LOGOUT
 Route::get('logout', function ()
 {
     auth()->logout();
@@ -35,4 +36,6 @@ Route::get('logout', function ()
     return Redirect::to('/');
 })->name('logout');
 
-Route::get('admin/user/list', [AdminUserController::class, 'list']);
+
+Route::get('admin/user', [AdminUserController::class, 'index'])->name('user');
+Route::get('admin/user/add', [AdminUserController::class, 'add'])->name('user.add');
