@@ -39,3 +39,4 @@ Route::get('logout', function ()
 
 Route::get('admin/user', [AdminUserController::class, 'index'])->name('user');
 Route::get('admin/user/add', [AdminUserController::class, 'add'])->name('user.add');
+Route::post('admin/user/store', [AdminUserController::class, 'store']);

@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
 	<title>Admin Tsmart</title>
-	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
+	<link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/logo.png') }}">
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/fontawesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('plugins/fontawesome/css/all.min.css') }}">
@@ -26,7 +26,7 @@
 	<div class="main-wrapper">
 		<div class="header">
 			<div class="header-left">
-				<a href="index.html" class="logo"> <img src="{{ asset('img/logo.png') }}" width="50" height="70" alt="logo"> <span class="logoclass">Tsmart</span> </a>
+				<a href="{{ url('dashboard') }}" class="logo"> <img src="{{ asset('img/logo.png') }}" width="50" height="70" alt="logo"> <span class="logoclass">Tsmart</span> </a>
 				<a href="index.html" class="logo logo-small"> <img src="{{ asset('img/logo.png') }}" alt="Logo" width="30" height="30"> </a>
 			</div>
 			<a href="javascript:void(0);" id="toggle_btn"> <i class="fe fe-text-align-left"></i> </a>
@@ -155,7 +155,7 @@
 						<li><a href="all-customer.html"> Danh sách </a></li>
 					</ul>
 				</li>
-				<li class="submenu"> <a href="{{ url('admin/user/list') }}"><i class="fas fa-key"></i> <span> Tài khoản </span> <span class="menu-arrow"></span></a>
+				<li class="submenu {{ Request::segment(2)=='user'?'active':null }}"> <a href="{{ url('admin/user/list') }}"><i class="fas fa-key"></i> <span> Tài khoản </span> <span class="menu-arrow"></span></a>
 					<ul class="submenu_class" style="display: none;">   
 						<li><a class="{{ Route::is('user')?'active':null }}" href="{{ url('admin/user') }}"> Danh sách </a></li>
 						<li><a href="{{ url('admin/user/add') }}" class="{{ Route::is('user.add')?'active':null }}" href="{{ url('admin/user/add') }}"> Thêm mới </a></li>
@@ -181,7 +181,7 @@
 <script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
 
 <script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
-<script src="{{ asset('js/chart.morris.js') }}"></script>
+<script src="{{ asset('js/chart.mozrris.js') }}"></script>
 
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>

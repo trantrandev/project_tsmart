@@ -1,10 +1,20 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content container-fluid">
+    {{-- SHOW STATUS --}}
+    @if (session('status') || session('status_isvalid'))
+    @php
+    $name_session = session('status')?'status':'status_isvalid' ;
+    $value_session = session('status')?session('status'):session('status_isvalid') ;
+    @endphp
+    <div class="alert mb-0 mt-5 @php echo show_status_bg($name_session)  @endphp">{{ $value_session }} <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">×</span>
+    </button></div>
+    @endif
     <div class="page-header">
         <div class="row align-items-center">
             <div class="col">
-                <div class="mt-4 d-flex justify-content-between align-items-center">
+                <div class="mt-5 d-flex justify-content-between align-items-center">
                     <h4 class="card-title mt-2">Tài khoản</h4>
                     <div class="group-item d-flex align-items-center">
                         <div class="top-nav-search mt-0 mr-3 ">
@@ -13,13 +23,13 @@
                                 <button class="btn" type="submit"><i class="fas fa-search"></i></button>
                             </form>
                         </div>
-                        <a href="add-employee.html" class="btn btn-primary veiwbutton">Thêm mới</a>
+                        <a href="{{ route('user.add') }}" class="btn btn-primary veiwbutton">Thêm mới</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
@@ -64,7 +74,7 @@
                                 @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="8"><p class="bg-info text-white p-2 mb-0">Không bản ghi nào được tìm thấy</p></td>
+                                    <td colspan="7"><p class="bg-info text-white p-2 mb-0">Không bản ghi nào được tìm thấy</p></td>
                                 </tr>
                                 @endif
                             </tbody>
@@ -94,6 +104,6 @@
 <script src="//cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.0/e-2.0.5/b-2.0.0/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.0/datatables.min.js"></script>
-{{-- <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script> --}}
+<script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 {{-- <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script> --}}
 @endsection

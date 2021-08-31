@@ -1,4 +1,5 @@
 <?php 
+ 
 if(!function_exists('show_status_bg')) {
 	function show_status_bg($status) {
 		$list_session = array(
