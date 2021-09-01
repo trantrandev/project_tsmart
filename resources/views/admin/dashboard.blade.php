@@ -209,4 +209,9 @@
     </div>
 </div>
 </div>
+
+{{-- Biểu đồ --}}
+<script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
+<script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
+<script src="{{ asset('js/chart.morris.js') }}"></script>
 @endsection

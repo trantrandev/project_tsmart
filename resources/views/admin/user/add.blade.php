@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 <div class="content container-fluid">
-	<form action="{{ url('admin/user/store') }}" method="POST">
+	<form action="{{ url('admin/user/store') }}" enctype='multipart/form-data' method="POST">
 		@csrf
 		<div class="page-header">
 			<div class="row align-items-center">
@@ -44,20 +44,12 @@
 							<span class="text-danger mt-1 d-block">{{ $message }}</span>
 							@enderror
 						</div>
-
-						<div class="form-group">
-							<label>Hình đại diện</label>
-							<div class="custom-file mb-3">
-								<input type="file" class="custom-file-input" accept="image/*" id="avatar" name="avatar">
-								<label class="custom-file-label" for="avatar">Chọn file</label>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
 						<div class="form-group">
 							<label>Số điên thoại</label>
 							<input class="form-control" name="phone" type="number" value="{{ old('phone') }}">
-						</div>
+						</div>						
+					</div>
+					<div class="col-md-6">
 						<div class="form-group">
 							<label>Giới tính</label>
 							<select class="form-control" id="gender" name="gender">
@@ -82,6 +74,28 @@
 							<label>Địa chỉ</label>
 							<textarea class="form-control" rows="2" id="address" name="address"></textarea>
 						</div>
+
+						<div class="form-group">
+							<label>Hình đại diện</label>
+							<div class="custom-file mb-3">
+								<input type="file" class="custom-file-input" accept="image/*" id="up-avatar" name="avatar">
+								<label class="custom-file-label" for="avatar">Chọn file</label>
+							@error('avatar')
+							<span class="text-danger mt-1 d-block">{{ $message }}</span>
+							@enderror
+							</div>
+							<img src="{{ asset('img/150.png') }}" style="max-width: 150px;" id="up-img" alt="">
+						</div>
+						<script>
+							$(function() {
+								$('#up-avatar').change(function(e) { 
+									var name_file = this.files[0].name;
+									var x = URL.createObjectURL(e.target.files[0]);  
+									$('#up-img').attr("src", x);
+									$('.custom-file-label').text(name_file);
+								});
+							});
+						</script>
 					</div>
 				</div>
 			</div>

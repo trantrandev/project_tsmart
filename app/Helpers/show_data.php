@@ -1,5 +1,5 @@
 <?php 
- 
+
 if(!function_exists('show_status_bg')) {
 	function show_status_bg($status) {
 		$list_session = array(
@@ -58,9 +58,8 @@ if(!function_exists('show_status_type1')) {
 if(!function_exists('show_status')) {
 	function show_status($status) {
 		$array_data = array(
-			'active' => '<div class="actions"><a href="#" class="btn btn-sm bg-success-light mr-2">Hoạt động</a> </div>',
-			'disable' => '<div class="actions"><a href="#" class="btn btn-sm bg-secondary-light mr-2">Vô hiệu</a>
-			</div>'
+			'active' => '<div class="status" style="cursor:pointer"><span class="badge badge-pill inv-badge">Hoạt động</span></div>',
+			'disable' => '<div class="status" style="cursor:pointer"><span class="badge badge-pill inv-secondary">Vô hiệu</span></div>'
 		);
 		if(array_key_exists($status, $array_data)){
 			return $array_data[$status];

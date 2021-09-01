@@ -35,17 +35,17 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="datatable table table-stripped table-checkall">
+                        <table class="datatable table table-stripped table-checkall ">
                             <thead>
                                 <tr>                                    
-                                    <th style="padding-left: 10px;">
+                                    <th scope="col" style="padding-left: 10px;">
                                         <input type="checkbox" name="checkall">
                                     </th>                                    
-                                    <th>Họ tên</th>
-                                    <th>Email</th> 
-                                    <th>Ngày tạo</th>
-                                    <th>Trạng thái</th>
-                                    <th>Quyền</th>
+                                    <th scope="col">Họ tên</th>
+                                    <th scope="col">Email</th> 
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Trạng thái</th>
+                                    <th scope="col">Quyền</th>
                                     <th class="text-right">Tác vụ</th>
                                 </tr>
                             </thead>
@@ -54,7 +54,7 @@
                                 @foreach ($users as $user)
                                 <tr>
                                     <td><input type="checkbox" name=checkbox></td> 
-                                    <td>{{ $user->name }}</td>
+                                    <td><a href="">{{ $user->name }}</a></td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <span class="custom-badge status-green">{{ $user->created_at }}</span>
@@ -102,7 +102,6 @@
 
 </div>
 <script src="//cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.0/e-2.0.5/b-2.0.0/datatables.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.0/datatables.min.js"></script>
 <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 {{-- <script src="{{ asset('plugins/datatables/datatables.min.js') }}"></script> --}}

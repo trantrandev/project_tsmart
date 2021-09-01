@@ -1870,7 +1870,8 @@ html.menu-opened body {
 	padding: 1.875rem 1.875rem 0;
 }
 .page-header {
-	margin-bottom: 1.875rem;
+	/*margin-bottom: 1.875rem;*/
+	margin-bottom: 0.55rem;
 }
 .page-header .breadcrumb {
 	background-color: transparent;
@@ -2386,6 +2387,16 @@ html.menu-opened body {
 	min-height: 28px;
 	line-height: 2;
 	background-color: #009688 !important;
+}
+.inv-secondary {
+	color: #fff;
+	display: inline-flex;
+	font-size: 11px;
+	justify-content: center;
+	min-width: 70px;
+	min-height: 28px;
+	line-height: 2;
+	background-color: #708381 !important;
 }
 .inv-logo {
 	max-height: 80px;

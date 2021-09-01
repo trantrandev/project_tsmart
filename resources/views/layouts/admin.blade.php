@@ -171,18 +171,17 @@
 <div class="page-wrapper">
 	@yield('content')
 </div>
-{{-- <script data-cfasync="false" src="../../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script> --}}
+
+<script src="{{ asset('plugins/encode_decode_email/jquery.spamguard.js') }}"></script>
+
 
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 
+{{-- Tạo sroll của sidebar --}}
 <script src="{{ asset('plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 
-<script src="{{ asset('plugins/raphael/raphael.min.js') }}"></script>
-
-<script src="{{ asset('plugins/morris/morris.min.js') }}"></script>
-<script src="{{ asset('js/chart.mozrris.js') }}"></script>
-
+{{-- cấu hình --}}
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
 </body>
